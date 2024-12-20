@@ -64,7 +64,7 @@ plt.title("Actual vs. Predicted Values")  # Set plot title
 plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], linestyle='--', color='red', linewidth=2)  # Add diagonal line
 plt.grid(True)  # Add grid (optional)
 plt.show()  # Display the plot
-
+st.pyplot(plt)
 
 X2 = pd.concat([X, pd.DataFrame(y, columns=['y'])], axis=1)
 X2 = X2.rename(columns={'y': 'Stima potenza elettrica assorbita'})
@@ -148,7 +148,7 @@ plt.xlim(y_test.min(), y_test.max())
 plt.ylim(y_test.min(), y_test.max())
 plt.grid()
 plt.show()
-
+st.pyplot(plt)
 
 spessore_tm = st.slider("Spessore Tubo madre ", 2.75, 8, 5)
 produttività = st.slider("Produttività ", 10, 45, 40)
