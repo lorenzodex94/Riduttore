@@ -143,3 +143,52 @@ plt.ylim(y_test.min(), y_test.max())
 plt.grid()
 plt.show()
 
+
+# Define input values for prediction
+
+input_data = {
+    'Spessore richiesto [mm]': [5],  # Example value, replace with your desired value
+    'Media di Produttività R ton/h': [44.35],  # Example value, replace with your desired value
+    'Media di VELOCITA INGRESSO TUBO': [60.58],  # Example value, replace with your desired value
+    'RIFERIMENTO INDUCTOTHERM': [77],  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 1 ASEA': [99],  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 2 ASEA': [99],  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 3 ASEA': [99],  # Example value, replace with your desired value
+    'Carbonio equivalente': [0.54],  # Example value, replace with your desired value
+}
+
+
+# Create a DataFrame from the input data
+input_df = pd.DataFrame(input_data)
+
+# Make predictions using the trained meta-model
+predicted_power = rf_regressor.predict(input_df)
+
+# Print the predicted temperature
+print(f"Predicted Power: {predicted_power[0]:.2f} W")
+
+
+input_data = {
+    'Spessore_richiesto__mm_': [5],  # Example value, replace with your desired value
+    'Media_di_Produttività_R_ton/h': [44.35],  # Example value, replace with your desired value
+    'Media_di_VELOCITA_INGRESSO_TUBO': [60.58],  # Example value, replace with your desired value
+    'RIFERIMENTO_INDUCTOTHERM': [77],  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_1_ASEA': [99],  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_2_ASEA': [99],  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_3_ASEA': [99],  # Example value, replace with your desired value
+    'Carbonio_equivalente': [0.54],  # Example value, replace with your desired value
+    'Stima_potenza_elettrica_assorbita': predicted_power # Example value, replace with your desired value
+}
+
+# Create a DataFrame from the input data
+input_df = pd.DataFrame(input_data)
+
+# Make predictions using the trained meta-model
+predicted_temperature = meta_model.predict(
+    np.column_stack((rf_model.predict(input_df), xgb_model.predict(input_df)))
+)
+
+# Print the predicted temperature
+print(f"Predicted Temperature: {predicted_temperature[0]:.2f} °C")
+
+
