@@ -2,6 +2,10 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
 
+# Title of the Streamlit app
+st.title(" Modello matematico Forno Riduttore L1")
+st.header("Analisi", divider=True)
+
 
 FILE_PATH = '/content/drive/MyDrive/Colab Notebooks/Progetti /Riduttore/Dati riduttore  1.csv'
 
@@ -144,16 +148,25 @@ plt.grid()
 plt.show()
 
 
+spessore_tm = st.slider("Spessore Tubo madre ", 2.75, 8, 5)
+produttività = st.slider("Produttività ", 10, 45, 40)
+velocità = st.slider("Velocità ", 10, 90, 60)
+vip = st.slider("RIFERIMENTO INDUCTOTHERM ", 50, 80, 75 )
+a1 = st.slider("RIFERIMENTO ZONA 1 ASEA ", 50, 99, 75 )
+a2 = st.slider("RIFERIMENTO ZONA 2 ASEA ", 50, 99, 75 )
+a3 = st.slider("RIFERIMENTO ZONA 3 ASEA ", 50, 99, 75 )
+carbonio = st.slider("Carbonio equivalente ", 0.1, 0.6, 0.54 )
+
 # Define input values for prediction
 
 input_data = {
-    'Spessore richiesto [mm]': [5],  # Example value, replace with your desired value
-    'Media di Produttività R ton/h': [44.35],  # Example value, replace with your desired value
-    'Media di VELOCITA INGRESSO TUBO': [60.58],  # Example value, replace with your desired value
-    'RIFERIMENTO INDUCTOTHERM': [77],  # Example value, replace with your desired value
-    'RIFERIMENTO ZONA 1 ASEA': [99],  # Example value, replace with your desired value
-    'RIFERIMENTO ZONA 2 ASEA': [99],  # Example value, replace with your desired value
-    'RIFERIMENTO ZONA 3 ASEA': [99],  # Example value, replace with your desired value
+    'Spessore richiesto [mm]': spessore_tm,  # Example value, replace with your desired value
+    'Media di Produttività R ton/h': produttività,  # Example value, replace with your desired value
+    'Media di VELOCITA INGRESSO TUBO': velocità,  # Example value, replace with your desired value
+    'RIFERIMENTO INDUCTOTHERM': vip,  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 1 ASEA': a1,  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 2 ASEA': a2,  # Example value, replace with your desired value
+    'RIFERIMENTO ZONA 3 ASEA': a3,  # Example value, replace with your desired value
     'Carbonio equivalente': [0.54],  # Example value, replace with your desired value
 }
 
@@ -169,13 +182,13 @@ print(f"Predicted Power: {predicted_power[0]:.2f} W")
 
 
 input_data = {
-    'Spessore_richiesto__mm_': [5],  # Example value, replace with your desired value
-    'Media_di_Produttività_R_ton/h': [44.35],  # Example value, replace with your desired value
-    'Media_di_VELOCITA_INGRESSO_TUBO': [60.58],  # Example value, replace with your desired value
-    'RIFERIMENTO_INDUCTOTHERM': [77],  # Example value, replace with your desired value
-    'RIFERIMENTO_ZONA_1_ASEA': [99],  # Example value, replace with your desired value
-    'RIFERIMENTO_ZONA_2_ASEA': [99],  # Example value, replace with your desired value
-    'RIFERIMENTO_ZONA_3_ASEA': [99],  # Example value, replace with your desired value
+    'Spessore_richiesto__mm_': spessore_tm,  # Example value, replace with your desired value
+    'Media_di_Produttività_R_ton/h': produttività,  # Example value, replace with your desired value
+    'Media_di_VELOCITA_INGRESSO_TUBO': velocità,  # Example value, replace with your desired value
+    'RIFERIMENTO_INDUCTOTHERM': vip,  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_1_ASEA': a1,  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_2_ASEA': a2,  # Example value, replace with your desired value
+    'RIFERIMENTO_ZONA_3_ASEA': a3,  # Example value, replace with your desired value
     'Carbonio_equivalente': [0.54],  # Example value, replace with your desired value
     'Stima_potenza_elettrica_assorbita': predicted_power # Example value, replace with your desired value
 }
