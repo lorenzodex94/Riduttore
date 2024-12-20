@@ -6,3 +6,4 @@ scikit-learn
 ollama
 seaborn
 xgboost
+streamlit
