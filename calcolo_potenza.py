@@ -10,7 +10,8 @@ st.header("Analisi", divider=True)
 
 FILE_PATH = '/content/drive/MyDrive/Colab Notebooks/Progetti /Riduttore/Dati riduttore  1.csv'
 
-df = pd.read_csv(FILE_PATH)
+df = pd.read_csv('dati.csv')
+#df = pd.read_csv(FILE_PATH)
 df = df[df['Somma di Produzione ton'] > 1]
 df = df.drop(columns=['Marca acciaio'])
 
