@@ -12,19 +12,19 @@ from sklearn.preprocessing import StandardScaler
 # Titolo dell'app
 st.title("Previsione Potenza e Temperatura Forno")
 
-# Percorso del file CSV (modifica con il tuo percorso reale)
-FILE_PATH = "Riduttore/Dati riduttore 1.csv"  # Sostituisci con il nome del tuo file CSV
+# URL del file CSV RAW su GitHub (MODIFICA QUESTO!)
+FILE_URL = "https://raw.githubusercontent.com/lorenzodex94/Riduttore/main/Dati%20riduttore%20%201.csv"
 
 # Caricamento dei dati
 @st.cache_data  # Caching per migliorare le prestazioni
-def load_data(file_path):
-    df = pd.read_csv(file_path)  # Carica il file CSV
+def load_data(url):
+    df = pd.read_csv(url)  # Carica il file CSV da URL
     return df
 
 
 # Prova a caricare i dati. Se fallisce, mostra un messaggio d'errore.
 try:
-    df = load_data(FILE_PATH)
+    df = load_data(FILE_URL)
     st.write("Anteprima dei dati caricati:")
     st.dataframe(df.head())  # Mostra le prime righe del dataframe
 
@@ -46,7 +46,7 @@ try:
     # st.write("Nomi delle colonne dopo la pulizia:", X.columns)
 
 
-    # 3. Divisione in Train, Validation e Test (FATTA SOLO UNA VOLTA)
+    # 3. Divisione in Train, Validation e Test (FATTO SOLO UNA VOLTA)
     X_train, X_temp, y_train_potenza, y_temp_potenza = train_test_split(X, target_potenza, test_size=0.3, random_state=42)  # random_state fisso
     X_val, X_test, y_val_potenza, y_test_potenza = train_test_split(X_temp, y_temp_potenza, test_size=0.5, random_state=42)  # random_state fisso
 
@@ -220,7 +220,5 @@ try:
     if st.button("Predici"):
         predict_values(spessore, velocita, inductotherm, zona1, zona2, zona3, carbonio)
 
-except FileNotFoundError:
-    st.error(f"Errore: Impossibile trovare il file CSV. Assicurati che il file '{FILE_PATH}' si trovi nella stessa directory dello script e che il nome del file sia corretto.")
 except Exception as e:
     st.error(f"Si è verificato un errore durante il caricamento dei dati: {e}")
