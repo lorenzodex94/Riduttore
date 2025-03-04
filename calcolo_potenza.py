@@ -13,7 +13,7 @@ from sklearn.preprocessing import StandardScaler
 st.title("Previsione Potenza e Temperatura Forno")
 
 # Percorso del file CSV (modifica con il tuo percorso reale)
-FILE_PATH = "Dati riduttore 1.csv"  # Sostituisci con il nome del tuo file CSV
+FILE_PATH = "Riduttore/Dati riduttore 1.csv"  # Sostituisci con il nome del tuo file CSV
 
 # Caricamento dei dati
 @st.cache_data  # Caching per migliorare le prestazioni
